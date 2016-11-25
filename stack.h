@@ -1,6 +1,5 @@
 #ifndef STACK_H
 #define STACK_H
-#include <set>
 
 template <typename T>
 class Stack
@@ -18,3 +17,4 @@ class Stack
 };
 
 #endif // STACK_H
+
