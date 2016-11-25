@@ -1,5 +1,5 @@
 #include "Stack.h"
-#include <set>
+#include <vector>
 #include <iostream>
 
 #define ERROR "Pila vacia"
@@ -7,14 +7,14 @@
 template <typename T>
 Stack<T>::Stack()
 {
-    std::set<T> x1;
+    std::vector<T> x1;
     this->x=x1;
 }
 
 template <typename T>
 bool Stack<T>::empty()
 {
-    if (x.begin()==NULL)
+    if (x[0]==NULL)
         return true;
     else
         return false;
@@ -23,20 +23,23 @@ bool Stack<T>::empty()
 template <typename T>
 void Stack<T>::push(const T &item)
 {
-    x.insert(item);
+    x.push_back(item);
 }
 
 template <typename T>
 T &Stack<T>::top()
 {
-    std::cout << x.end() << std::endl;
+    int i=x.size();
+    std::cout << x[i] << std::endl;
 }
 
 template <typename T>
 void Stack<T>::pop()
 {
+    int i=x.size();
+
     if (x.empty()==false)
-        x.remove(x.end());
+        x[i]=NULL;
     else
         return ERROR;
 }
@@ -45,6 +48,6 @@ template <typename T>
 Stack<T> Stack<T>::operator+(const Stack<T> &a, const Stack<T> &b)
 {
     Stack<T> c();
-    
-    
+
+
 }
