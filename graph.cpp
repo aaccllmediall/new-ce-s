@@ -17,11 +17,14 @@ class Graph
 
 Graph::Graph(const vector<int> &stars, const vector<int> &ends)
 {
-	int a;
+	int a, b;
 	this->out=stars;
 	this->to=ends;
 	
-	for (int i=0; i<nodes; i++){
+	cout << "coloque numero de nodos: " << endl;
+	cin>> b;
+	this->nodes=b; 
+	for (int i=0; i<b; i++){
 		cout << "coloque node de salida: " << endl;
 		cin >> a;
 		stars.push_back(a);
@@ -44,11 +47,16 @@ int Graph::numOutgoing(const int nodeID) const
 
 const vector<int> &Graph::adjacent(const int nodeID) const
 {
-	
+	vector<int> a;
+	for (int i=0; i<nodes; i++){
+		if (out[i]==nodeID)
+			a.push_back(to[i]);
+	}
+	return a;
 };
 
 int main()
 {
-	std::cout << "pipol" << std::endl;
+	Graph raf(entrada, salida);
 	return 0;
 }
