@@ -11,13 +11,13 @@ class Stack
     public:
         Stack();
         bool empty();
-        void push(const T &item);
+        void push(T &item);
         T &top();
         void pop();
-        friend Stack<T> operator+(const Stack<T> & , const Stack<T> & );
-
-    private:
-        T x;
+		friend Stack<T> operator+(Stack<T> & , Stack<T> & );
+    
+	private:
+        vector<T> x;
 };
 
 template <typename T>
@@ -25,7 +25,7 @@ Stack<T>::Stack()
 {
     vector<T> x1;
     this->x=x1;
-}
+};
 
 template <typename T>
 bool Stack<T>::empty()
@@ -34,20 +34,20 @@ bool Stack<T>::empty()
         return true;
     else
         return false;
-}
+};
 
 template <typename T>
-void Stack<T>::push(const T &item)
+void Stack<T>::push(T &item)
 {
-    x.push_back(item);
-}
+    x.push_back(&item);
+};
 
 template <typename T>
 T &Stack<T>::top()
 {
     int i=x.size();
     cout << x[i] << endl;
-}
+};
 
 template <typename T>
 void Stack<T>::pop()
@@ -58,13 +58,25 @@ void Stack<T>::pop()
         x[i]=NULL;
     else
         return ERROR;
-}
+};
 
 template <typename T>
-Stack<T> Stack<T>::operator+(const Stack<T> &a, const Stack<T> &b)
+Stack<T> operator+(Stack<T> &a, Stack<T> &b)
 {
-    Stack<T> c();
+	Stack<T> aux={};
+	int min;
+	
+	if (a.x.size()<b.x.size())
+		min=a.x.size();
+	else
+		min=b.x.size();
+	for (int i=0; i<min; i++)
+		aux.push_back(a.x[i]+b.x[i]);
+	return aux;
+};
 
-
+int main()
+{
+	Stack<float> p();
+	return 0;
 }
-
