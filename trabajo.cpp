@@ -10,6 +10,7 @@
 void GoPos(int x,int y);
 void OcultarCursor();
 void Interfaz();
+double score=0;
 
 
 class NAVE
@@ -25,7 +26,7 @@ public:
 	void borrar();
 	void mover();
 	void pintar_corazones();
-	void morir();
+	bool morir();
 };
 
 class AST
@@ -105,10 +106,11 @@ void NAVE::pintar_corazones()
 	}
 }
 
-void NAVE::morir()
+bool NAVE::morir()
 {
 	if(corazones==0){
 		vidas--;
+
 		borrar();
 		GoPos(x,y);	 printf("  **  ");
 		GoPos(x,y+1);printf(" ****  ");
@@ -124,40 +126,69 @@ void NAVE::morir()
 		pintar();
 		corazones=3;
 		pintar_corazones();
+
+		if (vidas<1)
+            return true;
 	}
+
+    return false;
 }
 int main()
 {
+    int sal=90, yal=0, fal=0;
 
     OcultarCursor();
     Interfaz();
+    GoPos(5, 2); printf("SCORE: ");
 
     NAVE N1(75,34,3,3);
     N1.pintar();
     N1.pintar_corazones();
 
-    AST as1(10,20);
-    as1.pintar();
-    AST as2(10,20);
-    as1.pintar();
-    AST as3(10,20);
-    as1.pintar();
-    AST as4(10,20);
-    as4.pintar();
+    AST as1(10,20); as1.pintar();
+    AST as2(10,20); as1.pintar();
+    AST as3(10,20); as1.pintar();
+    AST as4(10,20); as4.pintar();
+    AST as5(10,20); as5.pintar();
+    AST as6(10,20); as6.pintar();
 
-	bool game_over=false;
-	while(!game_over){
-		N1.morir();
+	bool a;
+
+	while(true){
+        GoPos(15, 2); printf("%f", score);
+		a=N1.morir();
+		if (a==true)
+            break;
 		N1.mover();
 
 		as1.mover();as1.choque(N1);
         as2.mover();as2.choque(N1);
         as3.mover();as3.choque(N1);
 		as4.mover();as4.choque(N1);
+		as5.mover();as5.choque(N1);
+		as6.mover();as6.choque(N1);
+		score=score+0.000001;
+        if (score>=0.001){
+            if (score>=1.0){
+                GoPos(36, 2); printf("REALLY AWESOME!!!");
+            }
+            else if (score>=0.1){
+                GoPos(36, 2); printf("EXCELLENT!!!");
+            }
+            else if (score>=0.001){
+                GoPos(36, 2); printf("AMAZING!!!");
+            }
+        }
+        yal++;
+        if (yal>=20){
+            sal--;
+            yal=0-fal;
+            fal+=20;
+        }
 
-		Sleep(30);
+		Sleep(sal);
 	}
-
+    GoPos(60,15); printf("GAME OVER, YOU BIG PUSSY! :v");
 	return 0;
 }
 
